@@ -23,12 +23,12 @@ def run_query(dbconn, statement):
 
 def test_create_and_insert(db):
     cur = db.cursor()
-    with open("create.sql") as f:
+    with open("createtable.sql") as f:
         cur.executescript(f.read())
     cur.close()
 
     cur = db.cursor()
-    with open("insert.sql") as f:
+    with open("insert(1).sql") as f:
         cur.executescript(f.read())
     cur.close()
 
@@ -43,13 +43,13 @@ def test_create_and_insert(db):
 
 
 def test_run_query1(db):
-    with open("query1.sql") as f:
+    with open("Query(1).sql") as f:
         query = f.read()
         items = run_query(db, query)
     assert set(x[0] for x in items) == set(["The C Programming Language", "The Go Programming Language", "The UNIX Programming Environment"])
 
 def test_run_query2(db):
-    with open("query2.sql") as f:
+    with open("Query(2).sql") as f:
         query = f.read()
         items = run_query(db, query)
     expected = set([("The City and The City", "Del Rey"),
@@ -59,7 +59,7 @@ def test_run_query2(db):
 
 
 def test_run_query3(db):
-    with open("query3.sql") as f:
+    with open("Query(3).sql") as f:
         query = f.read()
         items = run_query(db, query)
     expected = set(['The C Programming Language', 'The Go Programming Language', 'The UNIX Programming Environment', 'Cryptonomicon', 'Deep Work', 'The City and The City', 'The Great War for Civilisation'])
@@ -67,7 +67,7 @@ def test_run_query3(db):
     assert set(x[0] for x in items) == expected
 
 def test_run_query4(db):
-    with open("query4.sql") as f:
+    with open("Query(4).sql") as f:
         query = f.read()
         items = run_query(db, query)
     expected = set(["Productivity", "Psychology"])
@@ -75,7 +75,7 @@ def test_run_query4(db):
 
 def test_run_update1(db):
     cur = db.cursor()
-    with open("update1.sql") as f:
+    with open("update(1).sql") as f:
         cur.executescript(f.read())
     cur.close()
 
@@ -84,7 +84,7 @@ def test_run_update1(db):
 
 def test_run_delete(db):
     cur = db.cursor()
-    with open("delete1.sql") as f:
+    with open("delete(1).sql") as f:
         cur.executescript(f.read())
     cur.close()
 
